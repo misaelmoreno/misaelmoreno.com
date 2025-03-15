@@ -1,0 +1,85 @@
+@use "Variables";
+
+.navbar {
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40vw;
+  background-color: #030303;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+
+  &__logo {
+    background-color: Variables.$primary-color;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__menu-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &-separator {
+      width: 2px;
+      height: 40px;
+      background-color: rgb(48, 48, 48);
+      margin-right: 10px;
+    }
+
+    &-bars {
+      color: white;
+      font-size: 2rem;
+      transition: color 0.3s ease;
+      padding-right: 10px;
+
+      &:hover {
+        color: Variables.$primary-color;
+      }
+    }
+  }
+
+  &__menu {
+    z-index: 3;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 40vw;
+    height: calc(100vh - 70px);
+    background-color: rgba(25, 25, 25, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-list {
+      list-style: none;
+      text-align: center;
+      padding: 0;
+    }
+
+    &-item {
+      color: white;
+      font-size: 1.5rem;
+      margin: 15px 0;
+      cursor: pointer;
+
+      &:hover {
+        color: Variables.$primary-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .navbar,
+  .navbar__menu {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,70 @@
+@use "Variables";
+
+.projects {
+  &__item {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-left: 5px solid Variables.$primary-color;
+    background-color: #f4f4f4;
+    position: relative;
+  }
+
+  &__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  &__item-title,
+  &__item-duration,
+  &__item-description,
+  &__item-link {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  &__item-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__item-duration,
+  &__item-link {
+    color: Variables.$primary-color;
+  }
+
+  &__item-description {
+    color: #444;
+    margin-bottom: 10px;
+  }
+
+  &__item-link {
+    text-decoration: underline;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #016ba4;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .projects {
+    &__item {
+      padding: 25px;
+    }
+
+    &__item-title {
+      font-size: 1.2rem;
+      margin-right: 20px;
+    }
+
+    &__item-duration,
+    &__item-description,
+    &__item-link {
+      font-size: 0.9rem;
+    }
+  }
+}

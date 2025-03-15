@@ -1,0 +1,129 @@
+@use './Variables';
+
+.slider {
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+
+    &__slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+
+        &--active {
+            opacity: 1;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    &__text-container {
+        border-left: 5px solid Variables.$primary-color;
+        padding-left: 20px;
+    }
+
+    &__title {
+        font-size: 4.5rem;
+        margin: 0;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 1.2;
+    }
+
+    &__subtitle {
+        font-size: 1.8rem;
+        margin-top: 10px;
+    }
+
+    &__controls {
+        position: absolute;
+        bottom: 60px;
+        left: 60px;
+        right: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__indicator-line {
+        width: 30px;
+        height: 2px;
+        background-color: gray;
+        transition: background-color 0.3s ease-in-out;
+
+        &--active {
+            background-color: Variables.$primary-color;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    &__button {
+        background-color: Variables.$primary-color;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: Variables.$primary-color;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slider {
+        &__overlay {
+            top: 50%;
+        }
+
+        &__title {
+            font-size: 2.5rem;
+        }
+
+        &__subtitle {
+            font-size: 1.5rem;
+        }
+
+        &__controls {
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.layout {
+    display: flex;
+
+    &__left {
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40vw;
+        height: 100vh;
+    }
+
+    &__right {
+        margin-left: 40vw;
+        width: 60vw;
+        height: 100vh;
+        position: relative;
+    }
+
+    @media (max-width: 768px) {
+        &__left {
+            display: none;
+        }
+
+        &__right {
+            margin-left: 0;
+            width: 100vw;
+        }
+    }
+}

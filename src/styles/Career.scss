@@ -1,0 +1,137 @@
+@use "Variables";
+
+.career {
+  &__company-group {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  &__company {
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 2px solid Variables.$primary-color;
+    position: relative;
+  }
+
+  &__company-name,
+  &__job-title {
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__company-name {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  &__job {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  &__timeline-marker {
+    width: 7px;
+    height: 7px;
+    background-color: #7a7a7a;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 9px;
+  }
+
+  &__job-title {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  &__job-duration-location {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  &__job-remote {
+    font-weight: bold;
+    color: Variables.$primary-color;
+  }
+
+  &__job-responsibilities {
+    ul {
+      list-style: disc inside;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+  }
+
+  &__job-skills {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  &__skill-chip {
+    background-color: Variables.$primary-color;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .career {
+    &__company-group {
+      margin-bottom: 20px;
+    }
+
+    &__company {
+      margin-left: 10px;
+      padding-left: 10px;
+      border-left: 2px solid Variables.$primary-color;
+    }
+
+    &__company-name {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    &__job {
+      margin-bottom: 15px;
+      padding-left: 15px;
+    }
+
+    &__job-title {
+      font-size: 1rem;
+    }
+
+    &__job-duration-location {
+      font-size: 0.8rem;
+    }
+
+    &__job-responsibilities {
+      ul {
+        padding-left: 15px;
+      }
+
+      li {
+        font-size: 0.8rem;
+      }
+    }
+
+    &__job-skills {
+      margin-top: 5px;
+    }
+
+    &__skill-chip {
+      padding: 3px 8px;
+      font-size: 0.75rem;
+    }
+  }
+}

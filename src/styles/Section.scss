@@ -1,0 +1,107 @@
+@use "Variables";
+
+.section {
+    padding: 25px 40px;
+    position: relative;
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 45px;
+        font-weight: bold;
+        color: #000000;
+        position: relative;
+        z-index: 2;
+        margin-top: 25px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 150px;
+            bottom: -15px;
+            border: 2px solid Variables.$primary-color;
+        }
+    }
+
+    &__subtitle {
+        text-transform: uppercase;
+        font-size: 25px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: Variables.$primary-color;
+        display: inline-block;
+        padding: 15px 30px;
+        position: relative;
+        z-index: 2;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: Variables.$primary-color transparent transparent transparent;
+            display: block;
+            width: 0;
+        }
+    }
+
+    &__deco::before {
+        content: attr(data-title);
+        text-transform: uppercase;
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        font-size: 90px;
+        font-weight: bold;
+        color: rgba(196, 196, 196, 0.1);
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    &__content {
+        margin-top: 50px;
+    }
+
+    &__separator {
+        margin-top: 50px;
+        width: 100%;
+        background-color: #ddd;
+        height: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 25px 20px;
+
+        &__title {
+            font-size: 30px;
+            margin-top: 15px;
+
+            &::after {
+                width: 100px;
+                bottom: -10px;
+            }
+        }
+
+        &__subtitle {
+            font-size: 18px;
+            padding: 10px 20px;
+
+            &::after {
+                bottom: -5px;
+                left: 10px;
+                border-width: 5px 5px 0;
+            }
+        }
+
+        &__deco {
+            font-size: 60px;
+            top: 30px;
+            left: 50px;
+        }
+    }
+}
