@@ -1,7 +1,7 @@
 const slides = [
     {
       title: 'Misael Moreno',
-      subtitle: 'Arquitecto de software',
+      subtitle: 'Técnico de Inteligencia Artificial',
       imagePath: '/images/slider/1.webp',
     },
     {
