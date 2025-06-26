@@ -50,17 +50,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="description" content="Arquitecto de Software Full-Stack con experiencia en desarrollo frontend y backend, especializado en tecnologías web y cloud, actualmente trabajando en el Grupo Inditex." />
+          <meta name="description" content="Técnico de Inteligencia Artificial con experiencia en desarrollo frontend y backend, especializado en tecnologías web y cloud, actualmente trabajando en el Grupo Inditex." />
           <meta name="author" content="Misael Moreno" />
-          <meta name="keywords" content="Arquitecto de Software, Full-Stack, React, .NET, Inditex, Desarrollo Web, Cloud, CI/CD, Microservicios" />
-          <meta property="og:title" content="Misael Moreno - Arquitecto de Software Full-Stack" />
-          <meta property="og:description" content="Con más de 20 años de experiencia en desarrollo de software, actualmente soy Arquitecto de Software Full-Stack en el Grupo Inditex, especializado en soluciones completas desde el frontend hasta el backend." />
+          <meta name="keywords" content="Técnico de Inteligencia Artificial, Full-Stack, React, .NET, Inditex, Desarrollo Web, Cloud, CI/CD, Microservicios" />
+          <meta property="og:title" content="Misael Moreno - Técnico de Inteligencia Artificial" />
+          <meta property="og:description" content="Con más de 20 años de experiencia en desarrollo de software, actualmente soy Técnico de Inteligencia Artificial en el Grupo Inditex, especializado en soluciones completas desde el frontend hasta el backend." />
           <meta property="og:image" content="/images/about-me.webp" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.misaelmoreno.com" />
           <link rel="canonical" href="https://www.misaelmoreno.com" />
           <link rel="icon" type="image/png" href="/images/favicon.webp" />
-          <title>Misael Moreno - Arquitecto de Software Full-Stack</title>
+          <title>Misael Moreno - Técnico de Inteligencia Artificial</title>
         </head>
         <body>
           <Slider slides={slides} autoplay delay={5000} />
