@@ -47,6 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
    */
   const scrollToTop = () => {
     setActiveSection(sections[0].id);
+    closeMenu();
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -56,8 +57,19 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar__logo">
-          <Image loading="eager" src="/images/logo.webp" alt={getUiText('logoAlt', locale)} width={90} height={40} onClick={scrollToTop} style={{ cursor: 'pointer' }} />
+        <div
+          className="navbar__logo"
+          role="button"
+          aria-label={getUiText('logoAlt', locale)}
+          onClick={scrollToTop}
+        >
+          <Image
+            loading="eager"
+            src="/images/logo.webp"
+            alt={getUiText('logoAlt', locale)}
+            width={90}
+            height={40}
+          />
         </div>
         <div className="navbar__menu-icon" onClick={toggleMenu}>
           <div className="navbar__menu-icon-separator" />
