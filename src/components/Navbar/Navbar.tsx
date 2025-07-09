@@ -57,9 +57,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
       <nav className="navbar">
         <div className="navbar__logo">
           <Image loading="eager" src="/images/logo.webp" alt={getUiText('logoAlt', locale)} width={90} height={40} onClick={scrollToTop} style={{ cursor: 'pointer' }} />
-          <div className="navbar__lang">
-            <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
-          </div>
         </div>
         <div className="navbar__menu-icon" onClick={toggleMenu}>
           <div className="navbar__menu-icon-separator" />
@@ -75,6 +72,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
               </li>
             ))}
           </ul>
+          <div className="navbar__menu-lang">
+            <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
+          </div>
         </div>
       )}
     </>
