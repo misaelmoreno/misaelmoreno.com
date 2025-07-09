@@ -24,7 +24,7 @@ interface NavbarProps {
  */
 const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { sections } = useSectionsContext();
+  const { sections, setActiveSection } = useSectionsContext();
   const { locale } = useLanguage();
   const switchTo = locale === 'es' ? 'en' : 'es';
 
@@ -46,6 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
    * Scrolls the window to the top smoothly.
    */
   const scrollToTop = () => {
+    setActiveSection(sections[0].id);
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
