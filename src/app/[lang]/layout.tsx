@@ -4,7 +4,7 @@
   as well as the main sections of the layout, such as the slider and content sections.
 */
 
-'use client';
+
 
 import React from 'react';
 import '@/styles/Layout.scss';
@@ -15,10 +15,6 @@ import { SectionsProvider, useSectionsContext } from '@/context/Sections';
 import { LanguageProvider, Locale } from '@/context/Language';
 import { meta } from '@/data/meta';
 
-interface LayoutProps {
-  children: React.ReactNode;
-  params: { lang: Locale };
-}
 
 /* 
   LayoutContent is a functional component that renders the main content of the layout.
@@ -46,13 +42,12 @@ const LayoutContent: React.FC<{children: React.ReactNode}> = ({ children }) => {
   It provides the Sections context and includes meta tags for SEO, 
   as well as the main structure of the HTML document.
 */
-const Layout: React.FC<LayoutProps> = ({ children, params }) => {
+export default function Layout({ children, params }: any) {
   const locale = params.lang as Locale;
   const metaText = meta[locale];
   return (
     <LanguageProvider defaultLocale={locale}>
-    <SectionsProvider>
-      <html lang={locale}>
+      <SectionsProvider>
         <head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -68,14 +63,9 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => {
           <link rel="icon" type="image/png" href="/images/favicon.webp" />
           <title>{metaText.title}</title>
         </head>
-        <body>
-          <Slider slides={slides[locale]} autoplay delay={5000} />
-          <LayoutContent>{children}</LayoutContent>
-        </body>
-      </html>
-    </SectionsProvider>
+        <Slider slides={slides[locale]} autoplay delay={5000} />
+        <LayoutContent>{children}</LayoutContent>
+      </SectionsProvider>
     </LanguageProvider>
   );
-};
-
-export default Layout;
+}

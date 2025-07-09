@@ -9,6 +9,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import '@/styles/Slider.scss';
+import type { SliderProps } from '@/interfaces/props';
 
 /* 
   The Slider component renders a slideshow with optional autoplay functionality.
