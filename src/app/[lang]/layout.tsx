@@ -3,9 +3,7 @@
   It includes the structure and meta information for the HTML document, 
   as well as the main sections of the layout, such as the slider and content sections.
 */
-
-
-
+'use client';
 import React from 'react';
 import '@/styles/Layout.scss';
 import Slider from '@/components/Slider/Slider';
