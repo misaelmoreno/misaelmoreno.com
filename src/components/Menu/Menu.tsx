@@ -10,6 +10,9 @@
 import React from 'react';
 import '@/styles/Menu.scss';
 import { useSectionsContext } from '@/context/Sections';
+import { useLanguage } from '@/context/Language';
+import Link from 'next/link';
+import type { MenuProps } from '@/interfaces/props';
 
 /* 
   The Menu component renders a list of sections.
@@ -17,6 +20,8 @@ import { useSectionsContext } from '@/context/Sections';
 */
 const Menu: React.FC<MenuProps> = ({ onSectionClick }) => {
   const { sections, activeSection } = useSectionsContext();
+  const { locale } = useLanguage();
+  const switchTo = locale === 'es' ? 'en' : 'es';
 
   return (
     <div className="menu">
@@ -31,6 +36,9 @@ const Menu: React.FC<MenuProps> = ({ onSectionClick }) => {
           </li>
         ))}
       </ul>
+      <div className="menu__lang">
+        <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
+      </div>
     </div>
   );
 };

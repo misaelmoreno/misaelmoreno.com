@@ -8,6 +8,7 @@
 
 import React, { forwardRef } from 'react';
 import '@/styles/Section.scss';
+import type { SectionProps } from '@/interfaces/props';
 
 /* 
  * The Section component renders a section element with 

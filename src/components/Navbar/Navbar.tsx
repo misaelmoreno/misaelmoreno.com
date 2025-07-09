@@ -8,8 +8,11 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import '@/styles/Navbar.scss';
 import { useSectionsContext } from '@/context/Sections';
+import { useLanguage } from '@/context/Language';
+import { getUiText } from '@/data/ui';
 
 interface NavbarProps {
   onSectionClick: (index: number) => void;
@@ -22,6 +25,8 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { sections } = useSectionsContext();
+  const { locale } = useLanguage();
+  const switchTo = locale === 'es' ? 'en' : 'es';
 
   /* 
    * Toggles the menu state between open and closed.
@@ -51,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
     <>
       <nav className="navbar">
         <div className="navbar__logo">
-          <Image loading="eager" src="/images/logo.webp" alt="Logotipo" width={90} height={40} onClick={scrollToTop} style={{ cursor: 'pointer' }} />
+          <Image loading="eager" src="/images/logo.webp" alt={getUiText('logoAlt', locale)} width={90} height={40} onClick={scrollToTop} style={{ cursor: 'pointer' }} />
         </div>
         <div className="navbar__menu-icon" onClick={toggleMenu}>
           <div className="navbar__menu-icon-separator" />
@@ -67,6 +72,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
               </li>
             ))}
           </ul>
+          <div className="navbar__menu-lang">
+            <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
+          </div>
         </div>
       )}
     </>

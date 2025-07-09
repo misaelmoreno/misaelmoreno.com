@@ -9,6 +9,8 @@
 import React from 'react';
 import '@/styles/AboutMe.scss';
 import { aboutMe } from '@/data/aboutMe';
+import { useLanguage } from '@/context/Language';
+import { getUiText } from '@/data/ui';
 import Image from 'next/image';
 
 /* 
@@ -16,13 +18,14 @@ import Image from 'next/image';
  * about the individual. The text content is split into paragraphs for better readability.
  */
 const AboutMe: React.FC = () => {
+    const { locale } = useLanguage();
     return (
             <div className="about-me">
                 <div className="about-me__image-container">
-                    <Image loading="eager" src="/images/about-me.webp" alt="Sobre mí" className="about-me__image" width="600" height="639" />
+                    <Image loading="eager" src="/images/about-me.webp" alt={getUiText('aboutAlt', locale)} className="about-me__image" width="600" height="639" />
                 </div>
                 <div className="about-me__content">
-                    {aboutMe.split('\n').map((paragraph, index) => (
+                    {aboutMe[locale].split('\n').map((paragraph, index) => (
                         <p key={index} className="about-me__paragraph">
                             {paragraph}
                         </p>
