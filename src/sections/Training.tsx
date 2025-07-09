@@ -10,6 +10,7 @@ The data for the training items is imported from a separate data file.
 import React from 'react';
 import '@/styles/Training.scss';
 import { training } from '@/data/training';
+import { useLanguage } from '@/context/Language';
 import Image from 'next/image';
 
 /* 
@@ -17,9 +18,10 @@ The Training component renders a list of training items.
 Each item displays an image, title, institution, date, and optionally a credential ID and description.
 */
 const Training: React.FC = () => {
+    const { locale } = useLanguage();
     return (
         <div className="training">
-            {training.map((item, index) => (
+            {training[locale].map((item, index) => (
                 <div key={index} className="training__item">
                     <div className="training__item-image">
                         <Image loading="lazy" src={item.image} alt={item.institution} width={100} height={100} />

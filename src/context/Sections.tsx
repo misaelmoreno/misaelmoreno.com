@@ -7,9 +7,10 @@
  * and a function to set the active section.
  */
 
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { sections as initialSections } from '@/data/sections';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { sections as sectionsByLocale } from '@/data/sections';
 import { Section, SectionsContextProps } from '@/interfaces/sections';
+import { useLanguage } from './Language';
 
 /* 
  * Creates a context to hold sections data and related functions.
@@ -21,7 +22,22 @@ const SectionsContext = createContext<SectionsContextProps | undefined>(undefine
  * Manages the state of sections and the active section.
  */
 export const SectionsProvider = ({ children }: { children: ReactNode }) => {
-  const [sections, setSections] = useState<Section[]>(initialSections);
+  const { locale } = useLanguage();
+  const [sections, setSections] = useState<Section[]>(
+    sectionsByLocale[locale].map((section, index) => ({
+      ...section,
+      active: index === 0,
+    }))
+  );
+
+  useEffect(() => {
+    setSections(
+      sectionsByLocale[locale].map((section, index) => ({
+        ...section,
+        active: index === 0,
+      }))
+    );
+  }, [locale]);
 
   /* 
    * Sets the active section based on the provided id.

@@ -9,6 +9,9 @@ and renders the grouped data in a structured format.
 import React from 'react';
 import '@/styles/Career.scss';
 import { career } from '@/data/career';
+import { useLanguage } from '@/context/Language';
+import { getUiText } from '@/data/ui';
+import type { JobDetails } from '@/interfaces/career';
 
 /* 
 The Career component processes the career data to group job positions by company 
@@ -16,7 +19,8 @@ and renders the grouped job positions with their details such as title, duration
 responsibilities, and skills.
 */
 const Career: React.FC = () => {
-    const groupedCareer = career.reduce((acc, job) => {
+    const { locale } = useLanguage();
+    const groupedCareer = career[locale].reduce((acc, job) => {
         const companyExists = acc.find(item => item.company === job.company);
         if (companyExists) {
             companyExists.jobs.push(job);
@@ -27,7 +31,7 @@ const Career: React.FC = () => {
             });
         }
         return acc;
-    }, [] as { company: string; jobs: typeof career }[]);
+    }, [] as { company: string; jobs: JobDetails[] }[]);
 
     return (
             <div className="career">
@@ -43,7 +47,7 @@ const Career: React.FC = () => {
                                             <div className="career__job-title">{job.title}</div>
                                             <p className="career__job-duration-location">
                                                 {job.duration} | {job.location}
-                                                {job.remote && <span className="career__job-remote"> (Remoto)</span>}
+                                                {job.remote && <span className="career__job-remote">{getUiText('remote', locale)}</span>}
                                             </p>
                                         </div>
                                     </div>

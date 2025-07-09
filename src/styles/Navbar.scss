@@ -19,6 +19,19 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    position: relative;
+
+    .navbar__lang {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
   }
 
   &__menu-icon {
