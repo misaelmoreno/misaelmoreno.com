@@ -9,6 +9,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Flag from '@/components/Flag/Flag';
+import type { Locale } from '@/context/Language';
 import '@/styles/Navbar.scss';
 import { useSectionsContext } from '@/context/Sections';
 import { useLanguage } from '@/context/Language';
@@ -73,7 +75,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
             ))}
           </ul>
           <div className="navbar__menu-lang">
-            <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
+            <Link href={`/${switchTo}`}>
+              <Flag locale={switchTo as Locale} />
+            </Link>
           </div>
         </div>
       )}

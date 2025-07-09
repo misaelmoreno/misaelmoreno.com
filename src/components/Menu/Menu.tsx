@@ -10,8 +10,9 @@
 import React from 'react';
 import '@/styles/Menu.scss';
 import { useSectionsContext } from '@/context/Sections';
-import { useLanguage } from '@/context/Language';
+import { useLanguage, Locale } from '@/context/Language';
 import Link from 'next/link';
+import Flag from '@/components/Flag/Flag';
 import type { MenuProps } from '@/interfaces/props';
 
 /* 
@@ -37,7 +38,9 @@ const Menu: React.FC<MenuProps> = ({ onSectionClick }) => {
         ))}
       </ul>
       <div className="menu__lang">
-        <Link href={`/${switchTo}`}>{switchTo.toUpperCase()}</Link>
+        <Link href={`/${switchTo}`}>
+          <Flag locale={switchTo as Locale} />
+        </Link>
       </div>
     </div>
   );
