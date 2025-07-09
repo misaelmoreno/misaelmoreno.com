@@ -48,7 +48,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionClick }) => {
   const scrollToTop = () => {
     setActiveSection(sections[0].id);
     closeMenu();
-    window.scrollTo({
+    const scrollEl = document.scrollingElement || document.documentElement;
+    scrollEl.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
