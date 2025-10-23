@@ -1,7 +1,22 @@
 /** @type {import('next').NextConfig} */
-// Next.js App Router does not yet support the i18n configuration.
-// Locale management is handled manually through the `[lang]` route,
-// so the default config object can be empty.
-const nextConfig = {};
+const nextConfig = {
+  // Enable experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['@/components', '@/sections'],
+  },
+  
+  // Optimize images
+  images: {
+    formats: ['image/webp'],
+  },
+  
+  // Enable compiler optimizations
+  compiler: {
+    // Remove console logs in production
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
+};
 
 export default nextConfig;

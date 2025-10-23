@@ -3,67 +3,79 @@
   It includes the structure and meta information for the HTML document, 
   as well as the main sections of the layout, such as the slider and content sections.
 */
-'use client';
 import React from 'react';
+import type { Metadata } from 'next';
 import '@/styles/Layout.scss';
-import Slider from '@/components/Slider/Slider';
-import { slides } from '@/data/slider';
-import SectionImg from '@/components/SectionImg/SectionImg';
-import { SectionsProvider, useSectionsContext } from '@/context/Sections';
-import { LanguageProvider, Locale } from '@/context/Language';
+import { Locale } from '@/context/Language';
 import { meta } from '@/data/meta';
-
-
-/* 
-  LayoutContent is a functional component that renders the main content of the layout.
-  It uses the active section from the Sections context to display an image and title.
-*/
-const LayoutContent: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const { activeSection } = useSectionsContext();
-
-  return (
-    <div className="layout">
-      <div className="layout__left">
-        {activeSection && (
-          <SectionImg img={activeSection.image} title={activeSection.title} />
-        )}
-      </div>
-      <div className="layout__right">
-        {children}
-      </div>
-    </div>
-  );
-};
+import ClientLayout from './client-layout';
 
 /* 
-  Layout is the main functional component that wraps the entire application layout.
-  It provides the Sections context and includes meta tags for SEO, 
-  as well as the main structure of the HTML document.
+  generateStaticParams generates static paths for both supported locales.
+  This enables static generation at build time for better performance.
 */
-export default function Layout({ children, params }: any) {
-  const locale = params.lang as Locale;
+export async function generateStaticParams() {
+  return [
+    { lang: 'es' },
+    { lang: 'en' },
+  ];
+}
+
+/* 
+  generateMetadata generates metadata for SEO optimization.
+  This runs on the server and ensures proper indexing by search engines.
+*/
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang as Locale;
   const metaText = meta[locale];
+  
+  return {
+    title: metaText.title,
+    description: metaText.description,
+    authors: [{ name: 'Misael Moreno' }],
+    keywords: metaText.keywords,
+    openGraph: {
+      title: metaText.ogTitle,
+      description: metaText.ogDescription,
+      images: ['/images/about-me.webp'],
+      type: 'website',
+      url: 'https://www.misaelmoreno.com',
+    },
+    alternates: {
+      canonical: `https://www.misaelmoreno.com/${locale}`,
+      languages: {
+        'es': 'https://www.misaelmoreno.com/es',
+        'en': 'https://www.misaelmoreno.com/en',
+      },
+    },
+    icons: {
+      icon: '/images/favicon.webp',
+    },
+  };
+}
+
+/* 
+  Layout is the main Server Component that wraps the application layout.
+  It delegates client-side interactivity to the ClientLayout component.
+*/
+export default async function Layout({ 
+  children, 
+  params 
+}: { 
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+
   return (
-    <LanguageProvider defaultLocale={locale}>
-      <SectionsProvider>
-        <head>
-          <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="description" content={metaText.description} />
-          <meta name="author" content="Misael Moreno" />
-          <meta name="keywords" content={metaText.keywords} />
-          <meta property="og:title" content={metaText.ogTitle} />
-          <meta property="og:description" content={metaText.ogDescription} />
-          <meta property="og:image" content="/images/about-me.webp" />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://www.misaelmoreno.com" />
-          <link rel="canonical" href="https://www.misaelmoreno.com" />
-          <link rel="icon" type="image/png" href="/images/favicon.webp" />
-          <title>{metaText.title}</title>
-        </head>
-        <Slider slides={slides[locale]} autoplay delay={5000} />
-        <LayoutContent>{children}</LayoutContent>
-      </SectionsProvider>
-    </LanguageProvider>
+    <html lang={locale}>
+      <body>
+        <ClientLayout locale={locale}>
+          {children}
+        </ClientLayout>
+      </body>
+    </html>
   );
 }
