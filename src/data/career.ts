@@ -48,7 +48,7 @@ const career: Record<Locale, JobDetails[]> = {
     { company: "T-Systems Iberia", title: "Técnico de soporte", employmentType: "Jornada completa", duration: "2005", location: "Madrid, Comunidad de Madrid, España", remote: false, responsibilities: [
         "Mantenimiento y configuración de grandes redes, servidores Active Directory y Exchange."
       ], skills: ["Servicio de soporte técnico", "Gestión de redes", "Active Server Pages", "Directorio activo", "Control remoto", "VBScript"] },
-    { company: "gedas iberia (VW Group)", title: "Técnico de soporte", employmentType: "Jornada completa", duration: "2001 - 2002", location: "Barcelona, Cataluña, España", remote: false, responsibilities: [
+    { company: "Gedas Iberia (VW Group)", title: "Técnico de soporte", employmentType: "Jornada completa", duration: "2001 - 2002", location: "Barcelona, Cataluña, España", remote: false, responsibilities: [
         "Gestión de incidencias, administración remota de redes, monitorización de recursos y desarrollo con herramientas de monitorización y automatización con ASP Clásico."
       ], skills: ["IBM Tivoli", "Gestión de redes", "Active Server Pages", "Soporte técnico", "Directorio activo", "Control remoto"] }
   ],
@@ -98,7 +98,7 @@ const career: Record<Locale, JobDetails[]> = {
     { company: "T-Systems Iberia", title: "Support Technician", employmentType: "Full-time", duration: "2005", location: "Madrid, Spain", remote: false, responsibilities: [
         "Maintenance and configuration of large networks, Active Directory servers and Exchange."
       ], skills: ["Technical support", "Network management", "Active Server Pages", "Active Directory", "Remote control", "VBScript"] },
-    { company: "gedas iberia (VW Group)", title: "Support Technician", employmentType: "Full-time", duration: "2001 - 2002", location: "Barcelona, Spain", remote: false, responsibilities: [
+    { company: "Gedas Iberia (VW Group)", title: "Support Technician", employmentType: "Full-time", duration: "2001 - 2002", location: "Barcelona, Spain", remote: false, responsibilities: [
         "Incident management, remote network administration, resource monitoring and development with classic ASP monitoring and automation tools."
       ], skills: ["IBM Tivoli", "Network management", "Active Server Pages", "Technical support", "Active Directory", "Remote control"] }
   ]
