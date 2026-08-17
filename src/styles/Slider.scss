@@ -127,3 +127,11 @@
         }
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .slider__slide,
+    .slider__indicator-line,
+    .slider__button {
+        transition: none;
+    }
+}

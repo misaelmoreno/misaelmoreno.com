@@ -1,7 +1,5 @@
-import type { Locale } from '@/context/Language';
-import type { JobDetails } from '@/interfaces/career';
-
-const career: Record<Locale, JobDetails[]> = {
+type JobDetails = { company: string; title: string; employmentType: string; duration: string; location: string; remote: boolean; responsibilities: string[]; skills: string[] };
+const career: Record<'es' | 'en', JobDetails[]> = {
   es: [
     { company: "Softtek", title: "Arquitecto de Software FrontEnd - Grupo Inditex", employmentType: "Jornada completa", duration: "jul. 2024 - actualidad", location: "Madrid, Madrid", remote: true, responsibilities: [
         "Diseño y optimización de aplicaciones y librerías reutilizables para React.",

@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { aboutMe } from '../../data/aboutMe';
+import { career } from '../../data/career';
+import { projects } from '../../data/projects';
+import { training } from '../../data/training';
+import { slides } from '../../data/slider';
+import { getUiText } from '../../data/ui';
+import logoImage from '../../assets/images/logo.webp';
+import aboutImage from '../../assets/images/about-me.webp';
+import section1Image from '../../assets/images/sections/1.webp';
+import section2Image from '../../assets/images/sections/2.webp';
+import section3Image from '../../assets/images/sections/3.webp';
+import section4Image from '../../assets/images/sections/4.webp';
+import githubImage from '../../assets/images/training/github.webp';
+import microsoftImage from '../../assets/images/training/microsoft.webp';
+import ministryImage from '../../assets/images/training/ministerio-trabajo.webp';
+import tajamarImage from '../../assets/images/training/tajamar.webp';
+import schoolImage from '../../assets/images/training/escuela-tecnologica-informatica.webp';
+
+type Locale = 'es' | 'en';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+const locale = (Astro.params.lang === 'en' ? 'en' : 'es') as Locale;
+const sections = [
+  { id: 1, title: locale === 'es' ? 'Sobre mí' : 'About Me', subtitle: locale === 'es' ? 'Información personal' : 'Personal Information', image: '/images/sections/1.webp', imageAsset: section1Image },
+  { id: 2, title: locale === 'es' ? 'Carrera' : 'Career', subtitle: locale === 'es' ? 'Experiencia profesional' : 'Professional Experience', image: '/images/sections/2.webp', imageAsset: section2Image },
+  { id: 3, title: locale === 'es' ? 'Formación' : 'Training', subtitle: locale === 'es' ? 'Educación académica' : 'Academic Education', image: '/images/sections/3.webp', imageAsset: section3Image },
+  { id: 4, title: locale === 'es' ? 'Proyectos' : 'Projects', subtitle: locale === 'es' ? 'Trabajos y proyectos' : 'Work and Projects', image: '/images/sections/4.webp', imageAsset: section4Image },
+];
+const trainingImages = { '/images/training/github.webp': githubImage, '/images/training/microsoft.webp': microsoftImage, '/images/training/ministerio-trabajo.webp': ministryImage, '/images/training/tajamar.webp': tajamarImage, '/images/training/escuela-tecnologica-informatica.webp': schoolImage };
+const groupedCareer = career[locale].reduce((groups, job) => {
+  const group = groups.find((item) => item.company === job.company);
+  if (group) group.jobs.push(job);
+  else groups.push({ company: job.company, jobs: [job] });
+  return groups;
+}, [] as { company: string; jobs: typeof career[Locale][number][] }[]);
+const switchTo = locale === 'es' ? 'en' : 'es';
+---
+
+<Layout locale={locale}>
+  <div class="slider" data-slider>
+    {slides[locale].map((slide, index) => (
+      <div class={`slider__slide ${index === 0 ? 'slider__slide--active' : ''}`} data-slide aria-hidden={index === 0 ? 'false' : 'true'} style={`background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${slide.imagePath})`}>
+        <div class="slider__overlay"><div class="slider__text-container"><h2 class="slider__title">{slide.title}</h2><p class="slider__subtitle">{slide.subtitle}</p></div></div>
+      </div>
+    ))}
+    <div class="slider__controls"><div class="slider__indicator">
+      {slides[locale].map((_, index) => <span class={`slider__indicator-line ${index === 0 ? 'slider__indicator-line--active' : ''}`} data-indicator />)}
+    </div><div class="slider__buttons"><button class="slider__button slider__button--prev" type="button" data-prev aria-label={locale === 'es' ? 'Diapositiva anterior' : 'Previous slide'}>❮</button><button class="slider__button slider__button--next" type="button" data-next aria-label={locale === 'es' ? 'Siguiente diapositiva' : 'Next slide'}>❯</button></div></div>
+  </div>
+
+  <div class="layout">
+    <div class="layout__left" data-section-image>
+      <div class="sectionimg"><div class="sectionimg__image"><img class="sectionimg__image-img" src={sections[0].imageAsset.src} alt={sections[0].title} width="1920" height="1080" decoding="async" /><div class="sectionimg__image-border"></div></div><div class="sectionimg__content-title"><h1 class="sectionimg__content-title-text" data-image-title>{sections[0].title}</h1><div class="sectionimg__content-title-line"></div></div></div>
+    </div>
+    <div class="layout__right">
+      <nav class="navbar">
+        <div class="navbar__logo"><Image src={logoImage} alt={getUiText('logoAlt', locale)} width={90} height={40} data-top /></div>
+        <button class="navbar__menu-icon" type="button" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}><div class="navbar__menu-icon-separator"></div><div class="navbar__menu-icon-bars" aria-hidden="true">☰</div></button>
+      </nav>
+      <div class="navbar__menu" id="mobile-menu" data-mobile-menu hidden><ul class="navbar__menu-list">
+        {sections.map((section, index) => <li><button class="navbar__menu-item" type="button" data-scroll={index}>{section.title}</button></li>)}
+      </ul><div class="navbar__menu-lang"><a href={`/${switchTo}`} aria-label={switchTo === 'es' ? 'Cambiar a español' : 'Switch to English'}><span class="flag" aria-hidden="true"><Fragment set:html={switchTo === 'es' ? '<svg viewBox="0 0 18 12" width="24" height="16"><rect width="18" height="12" fill="#C60B1E"/><rect y="3" width="18" height="6" fill="#FFC400"/></svg>' : '<svg viewBox="0 0 18 12" width="24" height="16"><rect width="18" height="12" fill="#012169"/><path d="M0 0L18 12M18 0L0 12" stroke="#FFF" stroke-width="2.4"/><path d="M0 0L18 12M18 0L0 12" stroke="#C8102E" stroke-width="1.2"/><path d="M9 0v12M0 6h18" stroke="#FFF" stroke-width="3"/><path d="M9 0v12M0 6h18" stroke="#C8102E" stroke-width="1.5"/></svg>'} /></span></a></div></div>
+      <div class="menu-shell"><div class="menu"><ul class="menu__list">{sections.map((section, index) => <li><button class={`menu__item ${index === 0 ? 'menu__item--active' : ''}`} aria-current={index === 0 ? 'true' : 'false'} type="button" data-scroll={index}>{section.title}</button></li>)}</ul><div class="menu__lang"><a href={`/${switchTo}`} aria-label={switchTo === 'es' ? 'Cambiar a español' : 'Switch to English'}><span class="flag" aria-hidden="true"><Fragment set:html={switchTo === 'es' ? '<svg viewBox="0 0 18 12" width="24" height="16"><rect width="18" height="12" fill="#C60B1E"/><rect y="3" width="18" height="6" fill="#FFC400"/></svg>' : '<svg viewBox="0 0 18 12" width="24" height="16"><rect width="18" height="12" fill="#012169"/><path d="M0 0L18 12M18 0L0 12" stroke="#FFF" stroke-width="2.4"/><path d="M0 0L18 12M18 0L0 12" stroke="#C8102E" stroke-width="1.2"/><path d="M9 0v12M0 6h18" stroke="#FFF" stroke-width="3"/><path d="M9 0v12M0 6h18" stroke="#C8102E" stroke-width="1.5"/></svg>'} /></span></a></div></div></div>
+
+      {sections.map((section) => (
+        <section class="section" data-section data-id={section.id} data-image={section.imageAsset.src} data-title={section.title}>
+          <div class="section__subtitle">{section.subtitle}</div><h2 class="section__title">{section.title}</h2><div class="section__deco" data-title={section.title}></div>
+          <div class="section__content">
+            {section.id === 1 && <div class="about-me"><div class="about-me__image-container"><Image loading="eager" decoding="async" src={aboutImage} alt={getUiText('aboutAlt', locale)} class="about-me__image" width={600} height={639} /></div><div class="about-me__content">{aboutMe[locale].split('\n').map((paragraph) => <p class="about-me__paragraph">{paragraph}</p>)}</div></div>}
+            {section.id === 2 && <div class="career">{groupedCareer.map((group) => <div class="career__company-group"><div class="career__company"><div class="career__company-name">{group.company}</div>{group.jobs.map((job) => <div class="career__job"><div class="career__job-header"><div class="career__timeline-marker"></div><div><div class="career__job-title">{job.title}</div><p class="career__job-duration-location">{job.duration} | {job.location}{job.remote && <span class="career__job-remote">{getUiText('remote', locale)}</span>}</p></div></div><div class="career__job-responsibilities"><ul>{job.responsibilities.map((item) => <li class="career__job-responsibility">{item}</li>)}</ul></div><div class="career__job-skills">{job.skills.map((skill) => <span class="career__skill-chip">{skill}</span>)}</div></div>)}</div></div>)}</div>}
+            {section.id === 3 && <div class="training">{training[locale].map((item) => <div class="training__item"><div class="training__item-image"><Image loading="lazy" decoding="async" src={trainingImages[item.image]} alt={item.institution} width={100} height={100} /></div><div class="training__item-content"><div class="training__item-title">{item.title}<span class="training__item-title-type">{item.type}</span></div><p class="training__item-institution">{item.institution}</p><p class="training__item-date">{item.date}{item.credentialId && <span class="training__item-credential"> | ID: {item.credentialId}</span>}</p>{item.description && <p class="training__item-description">{item.description}</p>}</div></div>)}</div>}
+            {section.id === 4 && <div class="projects">{projects[locale].map((project) => <div class="projects__item"><div class="projects__item-header"><div class="projects__item-title">{project.title}</div><p class="projects__item-duration">{project.duration}</p></div><p class="projects__item-description">{project.description}</p>{project.link && <a href={project.link} class="projects__item-link" target="_blank" rel="noopener noreferrer">{getUiText('readMore', locale)}</a>}</div>)}</div>}
+          </div><div class="section__separator"></div>
+        </section>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  const slides = [...document.querySelectorAll('[data-slide]')];
+  const indicators = [...document.querySelectorAll('[data-indicator]')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+  const show = (index) => { current = (index + slides.length) % slides.length; slides.forEach((slide, i) => { const active = i === current; slide.classList.toggle('slider__slide--active', active); slide.setAttribute('aria-hidden', String(!active)); }); indicators.forEach((line, i) => line.classList.toggle('slider__indicator-line--active', i === current)); };
+  document.querySelector('[data-next]')?.addEventListener('click', () => show(current + 1));
+  document.querySelector('[data-prev]')?.addEventListener('click', () => show(current - 1));
+  if (!reduceMotion) setInterval(() => show(current + 1), 5000);
+  const menu = document.querySelector('[data-mobile-menu]');
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const setMenuOpen = (open) => { menu.hidden = !open; menuToggle.setAttribute('aria-expanded', String(open)); };
+  menuToggle?.addEventListener('click', () => setMenuOpen(menu.hidden));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !menu.hidden) { setMenuOpen(false); menuToggle.focus(); } });
+  const sections = [...document.querySelectorAll('[data-section]')];
+  const desktopMenuItems = [...document.querySelectorAll('.menu__item[data-scroll]')];
+  const mobileMenuItems = [...document.querySelectorAll('.navbar__menu-item[data-scroll]')];
+  const menuShell = document.querySelector('.menu-shell');
+  const topMenu = document.querySelector('.menu');
+  const menuStart = menuShell.getBoundingClientRect().top + window.scrollY;
+  const setActiveMenu = (index) => { [...desktopMenuItems, ...mobileMenuItems].forEach((item) => { const active = Number(item.dataset.scroll) === index; item.classList.toggle('menu__item--active', active); item.setAttribute('aria-current', active ? 'true' : 'false'); }); };
+  const updateMenuPosition = () => topMenu.classList.toggle('menu--stuck', window.scrollY >= menuStart);
+  const scrollToSection = (index) => { setMenuOpen(false); setActiveMenu(index); sections[index]?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); };
+  document.querySelectorAll('[data-scroll]').forEach((item) => item.addEventListener('click', () => scrollToSection(Number(item.dataset.scroll))));
+  document.querySelector('[data-top]')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+  const image = document.querySelector('[data-section-image] img');
+  const imageTitle = document.querySelector('[data-image-title]');
+  let activeSection = sections[0];
+  const activateSection = (section) => {
+    if (!section || section === activeSection) return;
+    activeSection = section;
+    image.src = section.dataset.image;
+    image.alt = section.dataset.title;
+    imageTitle.textContent = section.dataset.title;
+    setActiveMenu(sections.indexOf(section));
+  };
+  const updateActiveSection = () => {
+    updateMenuPosition();
+    const anchor = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0];
+    sections.forEach((section) => { if (section.getBoundingClientRect().top + window.scrollY <= anchor) current = section; });
+    activateSection(current);
+  };
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('resize', updateActiveSection);
+  setActiveMenu(0);
+  updateActiveSection();
+</script>

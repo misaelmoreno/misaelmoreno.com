@@ -1,5 +1,4 @@
-import type { Locale } from '@/context/Language';
-const slides: Record<Locale, { title: string; subtitle: string; imagePath: string }[]> = {
+const slides: Record<'es' | 'en', { title: string; subtitle: string; imagePath: string }[]> = {
   es: [
     { title: 'Misael Moreno', subtitle: 'Arquitecto de software y Consultor de IA', imagePath: '/images/slider/1.webp' },
     { title: 'Experiencia', subtitle: '25 años de experiencia profesional', imagePath: '/images/slider/2.webp' },

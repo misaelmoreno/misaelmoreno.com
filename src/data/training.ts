@@ -1,7 +1,5 @@
-import type { Locale } from '@/context/Language';
-import type { TrainingDetails } from '@/interfaces/training';
-
-const training: Record<Locale, TrainingDetails[]> = {
+type TrainingDetails = { institution: string; title: string; type: string; date: string; credentialId?: string; description?: string; image: string };
+const training: Record<'es' | 'en', TrainingDetails[]> = {
   es: [
     { institution: 'GitHub Inc.', title: 'Github Fundations', type: 'Certificación', date: 'jul. 2024', image: '/images/training/github.webp' },
     { institution: 'Microsoft', title: 'Microsoft Certified: Azure Fundamentals', type: 'Certificación', date: 'dic. 2023', credentialId: '624784E19E85B2FD', image: '/images/training/microsoft.webp' },

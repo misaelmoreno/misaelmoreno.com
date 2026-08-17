@@ -1,103 +1,95 @@
-# 🏆 MisaelMoreno.com - Open Source Portfolio
+# MisaelMoreno.com - Open Source Portfolio
 
-![Performance Score](https://img.shields.io/badge/PageSpeed_100/100-brightgreen?style=flat-square)
-![DebugBear 99%](https://img.shields.io/badge/DebugBear_99%25-blue?style=flat-square)
-![Next.js](https://img.shields.io/badge/Next.js-15.2.2-black?style=flat-square&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-%5E5-blue?style=flat-square&logo=typescript)
-![SASS](https://img.shields.io/badge/SASS-%5E1.77.8-pink?style=flat-square&logo=sass)
+![Astro](https://img.shields.io/badge/Astro-7.x-ff5d01?style=flat-square&logo=astro)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)
+![SASS](https://img.shields.io/badge/SASS-1.89-pink?style=flat-square&logo=sass)
 
-## 🚀 About the Project
+Personal portfolio and resume website for Misael Moreno, available in Spanish and English.
 
-**MisaelMoreno.com** is my personal website, originally designed as a **portfolio & resume showcase** and a **technical challenge** to push the limits of web performance and visual aesthetics.
+## Technology
 
-Now, I'm making it **Open Source** so the community can use it as a solid foundation for their own online portfolios and resumes, benefiting from an **ultra-optimized, high-performance base**.
+- Astro 7 with static output
+- TypeScript
+- SASS/SCSS
+- `astro:assets` for optimized content images
+- `@astrojs/sitemap` for the XML sitemap
+- Vanilla browser APIs for the slider, menus and section navigation
 
-## 🎯 Project Highlights
+The project no longer depends on Next.js, React, a Node.js server or a server runtime. It is generated as plain static files and can be deployed to Cloudflare Pages, Cloudflare Workers Static Assets, Netlify, GitHub Pages or any static web host.
 
-- **100/100 in Google PageSpeed Insights** (Performance, Accessibility, SEO, and Best Practices).
-- **99% score in DebugBear** and similar results across other performance tools.
-- A sleek, modern, and dynamic UI with:
-  - Smooth scrolling
-  - Sliders & animations
-  - Floating menus
-  - Dynamic image loading
-- Designed for **maximum optimization without sacrificing visuals**.
+## Local Development
 
-## 🛠️ Tech Stack
+Install dependencies and start the development server:
 
-- **Next.js 15.2.2** (with **Server-Side Rendering** for better performance & SEO)
-- **TypeScript** for strong typing and maintainability
-- **SASS** for optimized and scalable styling
-- **ESLint** for code quality and linting
-
-## 📂 Project Structure
-
-```plaintext
-misaelmoreno.com/
-│── node_modules/       # Dependencies
-│── public/            # Static assets
-│── src/               # Main source code
-│   ├── app/           # Main Next.js pages
-│   ├── components/    # UI components (Navbar, Slider, Sections...)
-│   ├── context/       # Global state management
-│   ├── data/          # JSON-like structured data
-│   ├── interfaces/    # TypeScript interfaces
-│   ├── sections/      # Page sections (About, Projects, Skills...)
-│   ├── styles/        # SCSS stylesheets
-│── .eslintrc.json     # Linter configuration
-│── next.config.mjs    # Next.js configuration
-│── package.json       # Dependencies & scripts
-│── tsconfig.json      # TypeScript configuration
-│── README.md          # Project documentation
-```
-
-## 🏗️ Installation & Setup
-
-1️⃣ **Clone the Repository**
-```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/misaelmoreno.com.git
-cd misaelmoreno.com
-```
-
-2️⃣ **Install Dependencies**
 ```bash
 npm install
-```
-
-3️⃣ **Run the Development Server**
-```bash
 npm run dev
 ```
 
-4️⃣ **Build for Production**
+Create the production static export:
+
 ```bash
 npm run build
 ```
 
-## 📌 Customization
+The generated website is written to `dist/`. Preview the generated output locally with:
 
-Want to adapt this project to your own resume or portfolio? Here’s how:
+```bash
+npm run preview
+```
 
-- Modify **`src/data/`** files to update your personal details, projects, and sections.
-- Customize **styles** in `src/styles/` to match your brand.
-- Add new **components** inside `src/components/` to extend functionality.
+## Cloudflare Pages
 
-## 🏆 Performance Achievements
+Use the following build settings:
 
-- ✅ **Optimized SSR rendering** for lightning-fast loading times.
-- ✅ **Minimal JavaScript bundle size**, ensuring smooth user experience.
-- ✅ **SEO-ready structure** to maximize visibility in search engines.
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node.js version: use the version required by the current Astro release
 
-## 🤝 Contributing
+The root route redirects to `/es`. The `public/_redirects` file provides the same redirect for hosts that support the Netlify redirect format. Other hosts should configure an equivalent redirect from `/` to `/es`.
 
-Feel free to **fork, improve, and contribute** to this project! If you have ideas for improvements, submit a PR or open an issue.
+## Routes and SEO
 
-## 📜 License
+- `/` redirects to `/es`
+- `/es` is the Spanish version
+- `/en` is the English version
+- `/robots.txt` is generated during the build
+- `sitemap-index.xml` and its sitemap files are generated during the build
 
-This project is licensed under the **MIT License** – free to use and modify.
+Each localized page includes canonical URLs, alternate language links, Open Graph metadata, Twitter metadata and a localized document language.
 
----
+## Project Structure
 
-💡 **Want to see it in action?** Check it out: **[https://www.misaelmoreno.com](https://www.misaelmoreno.com)**
+```text
+misaelmoreno.com/
+|-- public/                 Static files, favicon, slider images and redirects
+|-- src/
+|   |-- assets/             Images processed by astro:assets
+|   |-- data/               Portfolio content and translations
+|   |-- layouts/            Document layout and metadata
+|   |-- pages/              Static routes and robots endpoint
+|   `-- styles/             Shared SCSS styles
+|-- astro.config.mjs        Static Astro and sitemap configuration
+|-- package.json            Scripts and dependencies
+|-- package-lock.json       Locked dependency versions
+`-- tsconfig.json           Astro TypeScript configuration
+```
 
-🚀 **If you like this project, give it a ⭐ on GitHub!**
+## Customization
+
+- Update personal information, career, training and projects in `src/data/`.
+- Update localized titles and metadata in `src/data/meta.ts`, `src/data/ui.ts` and the page route.
+- Adjust visual styles in `src/styles/`.
+- Replace images in `public/images/` and `src/assets/images/` when changing the portfolio media.
+
+## Migration Notes
+
+The original Next.js application was replaced by this Astro application in the repository root. The visual design, localized routes, responsive layout, slider, menu interactions and section navigation were preserved while removing the React/Next.js runtime.
+
+The site is intentionally static: all content is rendered at build time, while only the small amount of browser-side JavaScript required for scrolling, menu state and slider controls runs in the client.
+
+## License
+
+This project is licensed under the MIT License.
+
+Website: [https://www.misaelmoreno.com](https://www.misaelmoreno.com)

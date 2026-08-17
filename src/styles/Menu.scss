@@ -1,15 +1,25 @@
 @use "Variables";
 
+.menu-shell {
+  position: relative;
+  height: 70px;
+}
+
 .menu {
   z-index: 3;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: relative;
   background-color: #030303;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 70px;
+
+  &--stuck {
+    position: fixed;
+    top: 0;
+    left: 40vw;
+    width: 60vw;
+  }
 
   &__list {
     list-style: none;
@@ -31,6 +41,8 @@
   }
 
   &__item {
+    border: 0;
+    font: inherit;
     padding: 15px 30px;
     color: #ffffff;
     cursor: pointer;
@@ -42,7 +54,8 @@
       color: Variables.$primary-color;
     }
 
-    &--active {
+    &--active,
+    &.menu__item--active {
       color: #000000 !important;
       background-color: Variables.$primary-color-extra-contrast !important;
     }
@@ -50,6 +63,7 @@
 }
 
 @media (max-width: 768px) {
+  .menu-shell,
   .menu {
     display: none;
   }

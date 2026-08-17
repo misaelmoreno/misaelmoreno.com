@@ -13,7 +13,8 @@
     &__right {
         margin-left: 40vw;
         width: 60vw;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
         position: relative;
     }
 
@@ -24,7 +25,7 @@
 
         &__right {
             margin-left: 0;
-            width: 100vw;
+            width: 100%;
         }
     }
 }

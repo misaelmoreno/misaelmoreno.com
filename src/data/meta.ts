@@ -1,5 +1,3 @@
-import type { Locale } from '@/context/Language';
-
 export const meta = {
   es: {
     description: 'Arquitecto de Software Full-Stack con experiencia en desarrollo frontend y backend, especializado en tecnologías web y cloud, actualmente trabajando en el Grupo Inditex.',
@@ -15,4 +13,4 @@ export const meta = {
     ogDescription: 'With more than 20 years of software development experience, I am currently a Full-Stack Software Architect at the Inditex Group, specializing in end-to-end solutions.',
     title: 'Misael Moreno - Software Architect & AI Consultant'
   }
-} as Record<Locale, { description: string; keywords: string; ogTitle: string; ogDescription: string; title: string }>;
+} as Record<'es' | 'en', { description: string; keywords: string; ogTitle: string; ogDescription: string; title: string }>;

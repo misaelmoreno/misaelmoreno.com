@@ -1,7 +1,5 @@
-import type { Locale } from '@/context/Language';
-import type { ProjectDetails } from '@/interfaces/project';
-
-const projects: Record<Locale, ProjectDetails[]> = {
+type ProjectDetails = { title: string; duration: string; description: string; link?: string };
+const projects: Record<'es' | 'en', ProjectDetails[]> = {
   es: [
     {
       title: 'Cloe Asistente virtual para Android',

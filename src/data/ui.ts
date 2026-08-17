@@ -1,5 +1,3 @@
-import type { Locale } from '@/context/Language';
-
 export const ui = {
   logoAlt: { es: 'Logotipo', en: 'Logo' },
   readMore: { es: 'Leer más', en: 'Read more' },
@@ -9,4 +7,4 @@ export const ui = {
 
 export type UITextKey = keyof typeof ui;
 
-export const getUiText = (key: UITextKey, locale: Locale) => ui[key][locale];
+export const getUiText = (key: UITextKey, locale: 'es' | 'en') => ui[key][locale];

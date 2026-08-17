@@ -1,0 +1,38 @@
+---
+import '../styles/global.scss';
+import { meta } from '../data/meta';
+
+const { locale, title, description, keywords } = Astro.props;
+const metaText = meta[locale];
+const pageTitle = title ?? metaText.title;
+const pageDescription = description ?? metaText.description;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={keywords ?? metaText.keywords} />
+    <meta name="author" content="Misael Moreno" />
+    <meta property="og:title" content={metaText.ogTitle} />
+    <meta property="og:description" content={metaText.ogDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`https://www.misaelmoreno.com/${locale}`} />
+    <meta property="og:image" content="https://www.misaelmoreno.com/images/about-me.webp" />
+    <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_ES'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metaText.ogTitle} />
+    <meta name="twitter:description" content={metaText.ogDescription} />
+    <meta name="twitter:image" content="https://www.misaelmoreno.com/images/about-me.webp" />
+    <link rel="canonical" href={`https://www.misaelmoreno.com/${locale}`} />
+    <link rel="alternate" hreflang="es" href="https://www.misaelmoreno.com/es" />
+    <link rel="alternate" hreflang="en" href="https://www.misaelmoreno.com/en" />
+    <link rel="icon" href="/images/favicon.webp" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -2,29 +2,15 @@
   "name": "misaelmoreno.com",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "analyze": "ANALYZE=true next build"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "next": "15.3.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.2",
     "sass": "^1.89.2"
-  },
-  "devDependencies": {
-    "@types/node": "^20.19.6",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
-    "eslint": "^9.30.1",
-    "eslint-config-next": "15.3.5",
-    "typescript": "^5.8.3"
-  },
-  "overrides": {
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6"
   }
 }
