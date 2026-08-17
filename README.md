@@ -44,7 +44,7 @@ Use the following build settings:
 
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Node.js version: use the version required by the current Astro release
+- Node.js version: `22.19.0` or newer (set the `NODE_VERSION` environment variable in Cloudflare Pages)
 
 The root route redirects to `/es`. The `public/_redirects` file provides the same redirect for hosts that support the Netlify redirect format. Other hosts should configure an equivalent redirect from `/` to `/es`.
 
