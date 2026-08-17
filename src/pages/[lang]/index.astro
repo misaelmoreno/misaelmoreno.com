@@ -58,7 +58,7 @@ const switchTo = locale === 'es' ? 'en' : 'es';
     </div>
     <div class="layout__right">
       <nav class="navbar">
-        <div class="navbar__logo"><Image src={logoImage} alt={getUiText('logoAlt', locale)} width={90} height={40} data-top /></div>
+        <div class="navbar__logo"><Image src={logoImage} alt={getUiText('logoAlt', locale)} width={180} height={80} style="width: 90px; height: 40px;" loading="eager" decoding="async" data-top /></div>
         <button class="navbar__menu-icon" type="button" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}><div class="navbar__menu-icon-separator"></div><div class="navbar__menu-icon-bars" aria-hidden="true">☰</div></button>
       </nav>
       <div class="navbar__menu" id="mobile-menu" data-mobile-menu hidden><ul class="navbar__menu-list">
